@@ -112,7 +112,7 @@ void Ising::Move(int _metro){
 			if(random==0){sm=-1;}
 			else{sm=1;}
 			oene=Boltzmann(sm,o)-Boltzmann(_s[o],o);     //differenza di energia
-			oenem=(Boltzmann(sm,o)-0.02*sm) - (BoltzmannM(_sm[o],o)-0.02*_sm[o]);
+			oenem=BoltzmannM(sm,o) - BoltzmannM(_sm[o],o);
 			alpha=min(1.,exp(-_beta*oene));
 			alpham=min(1.,exp(-_beta*oenem));
 			r=_rnd->Rannyu();
@@ -124,8 +124,8 @@ void Ising::Move(int _metro){
 		
     			pUp=1./(1.+exp(_beta*(Boltzmann(-1,o)-Boltzmann(1,o))));
 			pDown=1./(1.+exp(_beta*(Boltzmann(1,o)-Boltzmann(-1,o))));
-			pUpm=1./(1.+exp(-_beta*(Boltzmann(-1,o)-Boltzmann(1,o)+0.04)));
-			pDownm=1./(1.+exp(_beta*(Boltzmann(1,o)-Boltzmann(-1,o)-0.04)));
+			pUpm=1./(1.+exp(-_beta*(BoltzmannM(-1,o)-BoltzmannM(1,o))));
+			pDownm=1./(1.+exp(_beta*(BoltzmannM(1,o)-BoltzmannM(-1,o))));
 			//if(pUp+pDown!=1.){cout<<"ERRORE! La somma di pUp e pDown in Gibbs è diversa da 1!!"<<endl;}
 			r=_rnd->Rannyu();
 			if(pDown<=pUp){
@@ -161,7 +161,7 @@ double Ising::Boltzmann(int sm, int ip){
 
 
 double Ising::BoltzmannM(int sm, int ip){
-	double ene = -_J * sm * ( _sm[Pbc(ip-1)] + _sm[Pbc(ip+1)] ) - _h * sm;
+	double ene = -_J * sm * ( _sm[Pbc(ip-1)] + _sm[Pbc(ip+1)] ) - 0.02* sm;
   	return ene;
 }
 

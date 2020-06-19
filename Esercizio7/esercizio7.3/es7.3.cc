@@ -13,7 +13,7 @@ int main(int argc, char **argv){
 	if(argc!=5){
 	cerr<<"per l'esecuzione del programma" <<argv[0]<< " bisogna inserire: 1)il nome del programma, 2,3,4)i files da cui leggere i valori (input.gas,input.liquid,input.solid) e 3)il file da cui caricare le posizioni iniziali delle particelle (config.0)"<<endl;
 	}
-	int nblk=100;
+	int nblk=1000;
 	cout<<"QUESTA SIMULAZIONE VERRÀ CONDOTTA UTILIZZANDO LE UNITA' DI MISURA DEL SISTEMA INTERNAZIONALE"<<endl;
 	//double epskb=120.;
 	
@@ -68,7 +68,7 @@ int main(int argc, char **argv){
 		molecole.ConfFinal();
 
 	//MISURA CON OPZIONE RESTART
-		nstep=1000;
+		nstep=500;
 		molecole.inputPosRestart();
 		for(int iblk=1;iblk<=nblk;iblk++){
 			molecole.Reset(iblk);

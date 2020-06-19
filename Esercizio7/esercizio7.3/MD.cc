@@ -394,7 +394,7 @@ double r, gdir;
 	Gofr<<endl;
 	
 
-	 cout << "----------------------------" << endl << endl;
+	 //cout << "----------------------------" << endl << endl;
 
     	Epot.close();
     	Pres.close();
